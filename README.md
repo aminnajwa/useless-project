@@ -79,14 +79,19 @@ QR code links directly to the hosted page, auto-triggering the display on scan.
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![WhatsApp Image 2025-08-09 at 02 53 49_70c49a20](https://github.com/user-attachments/assets/45500232-9a90-47e2-88ff-56f6a37c3a13)
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+At the top, there’s a message: "Scan to See Time" — telling people that scanning this QR code will reveal the current time.
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+Just below that, there’s the QR code itself — likely linked to a website or script that shows the live time when scanned.
+
+Under the QR code, there’s a button labeled "Download QR" with a blue download icon — this lets you save the QR code image to your device.
+
+Basically, this is your useless project idea: you have to scan a QR code just to see the current time, instead of simply looking at a clock. The humor comes from making a simple task unnecessarily complicated.
+
+![WhatsApp Image 2025-08-09 at 02 53 48_e9d93e87](https://github.com/user-attachments/assets/e3d95c54-4ff7-4b33-9c76-1b9ce2201cb8)
+
+The picture shows a scanned page opened on a computer screen. The page contains printed text along with Braille text intended for blind readers — however, since it’s displayed visually on a screen, it becomes completely unusable for the people it was meant to help, making it ironically useless.
 
 # Diagrams
 !<img width="687" height="635" alt="image" src="https://github.com/user-attachments/assets/660186fd-a469-4977-8396-0284d0062d93" />
