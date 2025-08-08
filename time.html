@@ -1,147 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🔥 Useless Time Portal 🔥</title>
+  <title>Current Time</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Courier New', monospace;
       background-color: #f9f3e9;
-      color: #5c4033;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      font-family: 'Courier New', monospace;
+      color: #5c4033;
       overflow: hidden;
-      position: relative;
     }
 
-    #loader {
-      border: 8px solid #e0d6cc;
-      border-top: 8px solid #5c4033;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
+    #loading {
+      font-size: 2em;
+      animation: blink 1s infinite;
       margin-bottom: 20px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-
-    #content {
-      display: none;
-      text-align: center;
-      animation: blast 0.6s ease-out forwards;
-    }
-
-    @keyframes blast {
-      0% {
-        transform: scale(0.5) rotate(-30deg);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
     }
 
     #clock {
       font-size: 4em;
+      display: none;
+    }
+
+    #date {
+      font-size: 1.5em;
+      display: none;
       margin-bottom: 20px;
     }
 
     #braille {
-      font-size: 1.2em;
-      color: #888;
+      font-size: 2em;
+      display: none;
     }
 
-    #audioCtrl {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #5c4033;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      font-family: monospace;
-      cursor: pointer;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Loading Spinner -->
-  <div id="loader"></div>
+  <div id="loading">⏳ Loading time...</div>
+  <div id="date"></div>
+  <div id="clock"></div>
+  <div id="braille"></div>
 
-  <!-- Content after loading -->
-  <div id="content">
-    <div id="clock">00:00:00</div>
-    <div id="braille"></div>
-  </div>
-
-  <!-- Audio -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://files.catbox.moe/kef41n.mp3" type="audio/mpeg">
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <button id="audioCtrl">🔊 Mute</button>
 
   <script>
-    const loader = document.getElementById("loader");
-    const content = document.getElementById("content");
-    const clock = document.getElementById("clock");
-    const braille = document.getElementById("braille");
-    const audio = document.getElementById("bgMusic");
-    const audioCtrl = document.getElementById("audioCtrl");
-
-    // Show loader then reveal content
-    setTimeout(() => {
-      loader.style.display = "none";
-      content.style.display = "block";
-    }, 2500);
-
-    function updateClock() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString();
-      clock.textContent = timeString;
-      braille.textContent = convertToBraille(timeString);
-    }
-
-    function convertToBraille(text) {
+    function toBraille(text) {
       const brailleMap = {
-        '0': '⠚', '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙',
-        '5': '⠑', '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊',
-        ':': '⠒'
+        '0': '⠚', '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙', '5': '⠑',
+        '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊', ':': '⠒'
       };
-      return text.split('').map(ch => brailleMap[ch] || ' ').join(' ');
+      return text.split('').map(char => brailleMap[char] || ' ').join('');
     }
 
-    // Update clock every second
-    setInterval(updateClock, 1000);
-    updateClock();
+    function showTime() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString();
+      const dateStr = now.toLocaleDateString();
 
-    // Music controls
-    audioCtrl.addEventListener("click", () => {
-      if (audio.muted) {
-        audio.muted = false;
-        audioCtrl.textContent = "🔊 Mute";
-      } else {
-        audio.muted = true;
-        audioCtrl.textContent = "🔈 Unmute";
-      }
-    });
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("clock").style.display = "block";
+      document.getElementById("date").style.display = "block";
+      document.getElementById("braille").style.display = "block";
+
+      document.getElementById("clock").textContent = timeStr;
+      document.getElementById("date").textContent = dateStr;
+      document.getElementById("braille").textContent = toBraille(timeStr);
+    }
+
+    setTimeout(showTime, 2000); // Simulate loading delay
+    setInterval(showTime, 1000);
   </script>
 
 </body>
