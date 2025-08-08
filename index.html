@@ -1,0 +1,89 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR to Time Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+  <style>
+    body {
+      background-color: #f9f3e9;
+      color: #5c4033;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    #qr {
+      margin-top: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-family: monospace;
+      font-size: 1rem;
+      background-color: #5c4033;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3e2b23;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔗 Scan to See Time</h1>
+  <div id="qr"></div>
+  <button id="downloadBtn">⬇️ Download QR</button>
+
+  <script>
+    const url = "https://aminnajwa.github.io/useless-project/time.html";
+    const qrDiv = document.getElementById("qr");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    function generateQRCode() {
+      QRCode.toDataURL(url, function (err, qrUrl) {
+        if (!err) {
+          qrDiv.innerHTML = ""; // Clear previous QR
+          const img = document.createElement("img");
+          img.src = qrUrl;
+          img.alt = "QR Code";
+          img.id = "qrImage";
+          img.style.maxWidth = "300px";
+          qrDiv.appendChild(img);
+
+          // Animation effect
+          qrDiv.style.transform = "scale(1.05)";
+          setTimeout(() => (qrDiv.style.transform = "scale(1)"), 300);
+
+          // Update download button
+          downloadBtn.onclick = () => {
+            const link = document.createElement("a");
+            link.href = qrUrl;
+            link.download = "time-qr.png";
+            link.click();
+          };
+        } else {
+          console.error("QR generation failed:", err);
+          qrDiv.innerText = "⚠️ Failed to generate QR code";
+        }
+      });
+    }
+
+    // Initial load
+    generateQRCode();
+
+    // Refresh QR every minute (if dynamic URLs are used later)
+    setInterval(generateQRCode, 60000);
+  </script>
+</body>
+</html>
