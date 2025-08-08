@@ -148,8 +148,9 @@ Step 4: You smile at how much effort it took to do something your watch could ha
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://youtube.com/shorts/bTG4KX0CbIE?si=UjP0ES5kdJbvbb53
+ First, I paste the Git link and it takes me to a webpage showing a QR code.
+ When I scan it, the current time appears—along with Braille text for blind people—making it wonderfully, and completely, useless.
 
 ## Team Contributions
 Nihala Fathima: Made screen QR code, styled smartphone display, arranged build for photos, did final testing.
