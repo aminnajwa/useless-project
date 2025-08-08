@@ -78,7 +78,7 @@ QR code links directly to the hosted page, auto-triggering the display on scan.
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
+# Screenshots 
 ![WhatsApp Image 2025-08-09 at 02 53 49_70c49a20](https://github.com/user-attachments/assets/45500232-9a90-47e2-88ff-56f6a37c3a13)
 
 At the top, there’s a message: "Scan to See Time" — telling people that scanning this QR code will reveal the current time.
@@ -153,6 +153,7 @@ Step 4: You smile at how much effort it took to do something your watch could ha
 
 ## Team Contributions
 Nihala Fathima: Made screen QR code, styled smartphone display, arranged build for photos, did final testing.
+
 Aminath Najwa: Came up with idea, made printed QR code, set up webpage with live time, added Braille dots.
 
 ---
