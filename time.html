@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>💣 Time Bomb Explosion</title>
   <style>
     body {
@@ -69,57 +69,56 @@
   <div id="explosion"></div>
 
   <div id="clockContainer">
-    <div id="clock">💥</div>
+    <div id="clock">⏳</div>
     <div id="date"></div>
     <div id="braille"></div>
   </div>
 
   <script>
+    // Function to convert text to Braille
+    function toBraille(text) {
+      const brailleMap = {
+        '0': '⠚', '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙',
+        '5': '⠑', '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊',
+        ':': '⠒', ' ': '⠀'
+      };
+      return text.split('').map(char => brailleMap[char] || '⠀').join('');
+    }
+
     function updateTime() {
       const now = new Date();
       const timeString = now.toLocaleTimeString();
       const dateString = now.toDateString();
-      const braille = timeString
-        .split('')
-        .map(char => {
-          const brailleMap = {
-            '0': '⠴', '1': '⠂', '2': '⠆', '3': '⠒', '4': '⠲',
-            '5': '⠢', '6': '⠖', '7': '⠶', '8': '⠦', '9': '⠔',
-            ':': '⠂', ' ': ' '
-          };
-          return brailleMap[char] || '';
-        })
-        .join('');
 
       document.getElementById("clock").textContent = timeString;
       document.getElementById("date").textContent = dateString;
-      document.getElementById("braille").textContent = `Braille: ${braille}`;
+      document.getElementById("braille").textContent = toBraille(timeString);
     }
 
-    function triggerExplosion() {
+    function startExplosion() {
       const explosion = document.getElementById("explosion");
-      const container = document.getElementById("clockContainer");
       const audio = document.getElementById("boomAudio");
+      const container = document.getElementById("clockContainer");
 
       // Show explosion
-      explosion.style.display = "block";
-      document.body.classList.add("shake");
+      explosion.style.display = 'block';
+      document.body.classList.add('shake');
 
       // Play sound
       audio.play();
 
-      // After delay, hide explosion and show clock
+      // After 3 seconds, hide explosion and show clock
       setTimeout(() => {
-        explosion.style.display = "none";
-        document.body.classList.remove("shake");
+        explosion.style.display = 'none';
+        document.body.classList.remove('shake');
         container.style.opacity = 1;
         updateTime();
         setInterval(updateTime, 1000);
-      }, 2500); // Adjust timing if needed
+      }, 3000);
     }
 
-    // Trigger the explosion on page load
-    window.onload = triggerExplosion;
+    window.onload = startExplosion;
   </script>
 </body>
 </html>
+
