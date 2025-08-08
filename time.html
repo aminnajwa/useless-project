@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>💣 Time Bomb Explosion</title>
   <style>
     body {
@@ -69,56 +69,46 @@
   <div id="explosion"></div>
 
   <div id="clockContainer">
-    <div id="clock">⏳</div>
+    <div id="clock">💥</div>
     <div id="date"></div>
     <div id="braille"></div>
   </div>
 
   <script>
-    // Function to convert text to Braille
-    function toBraille(text) {
+    function toBraille(str) {
       const brailleMap = {
-        '0': '⠚', '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙',
-        '5': '⠑', '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊',
-        ':': '⠒', ' ': '⠀'
+        '0': '\u2800', '1': '\u2801', '2': '\u2803', '3': '\u2809', '4': '\u2819',
+        '5': '\u2811', '6': '\u280B', '7': '\u281B', '8': '\u2813', '9': '\u280A',
+        ':': '\u2816', '/': '\u2824', '-': '\u2828', ' ': ' '
       };
-      return text.split('').map(char => brailleMap[char] || '⠀').join('');
+      return str.split('').map(c => brailleMap[c] || '\u283F').join('');
+    }
+
+    function showExplosion() {
+      const explosion = document.getElementById('explosion');
+      const audio = document.getElementById('boomAudio');
+      explosion.style.display = 'block';
+      document.body.classList.add('shake');
+      audio.play();
+
+      setTimeout(() => {
+        explosion.style.display = 'none';
+        document.getElementById('clockContainer').style.opacity = 1;
+      }, 3000);
     }
 
     function updateTime() {
       const now = new Date();
-      const timeString = now.toLocaleTimeString();
-      const dateString = now.toDateString();
-
-      document.getElementById("clock").textContent = timeString;
-      document.getElementById("date").textContent = dateString;
-      document.getElementById("braille").textContent = toBraille(timeString);
+      const time = now.toLocaleTimeString();
+      const date = now.toLocaleDateString();
+      document.getElementById('clock').textContent = time;
+      document.getElementById('date').textContent = date;
+      document.getElementById('braille').textContent = toBraille(time + ' ' + date);
     }
 
-    function startExplosion() {
-      const explosion = document.getElementById("explosion");
-      const audio = document.getElementById("boomAudio");
-      const container = document.getElementById("clockContainer");
-
-      // Show explosion
-      explosion.style.display = 'block';
-      document.body.classList.add('shake');
-
-      // Play sound
-      audio.play();
-
-      // After 3 seconds, hide explosion and show clock
-      setTimeout(() => {
-        explosion.style.display = 'none';
-        document.body.classList.remove('shake');
-        container.style.opacity = 1;
-        updateTime();
-        setInterval(updateTime, 1000);
-      }, 3000);
-    }
-
-    window.onload = startExplosion;
+    showExplosion();
+    updateTime();
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
-
